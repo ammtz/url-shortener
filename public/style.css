@@ -1,5 +1,7 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Baskervville SC", serif;
+  font-weight: 400;
+  font-style: normal;
   font-size: 16px;
   color: #222;
   background-color: #fff;
@@ -43,4 +45,8 @@ input {
 input[type='text'] {
   width: 220px;
   text-align: center;
+}
+
+.secondary-font {
+  font-family: "Doto", serif;
 }

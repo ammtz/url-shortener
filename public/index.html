@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>URL Shortener Microservice </title>
+    <link href="/public/style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville+SC&family=Doto:wght@100..900&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <h1>Shorten your URL now!</h1>
+    <main>
+      <section>
+        <form action="api/shorturl" method="POST">
+          <fieldset>
+            <legend>url shortening machine</legend>
+            <input id="url_input" type="text" name="url" placeholder="https://www.someurl.mx/" />
+            <input type="submit" value="POST URL"/>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <p class="secondary-font">By ammtz</p>
+    </footer>
+  </body>
+</html>
