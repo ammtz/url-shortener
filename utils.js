@@ -7,20 +7,23 @@ const urlRouter = Router();
 
 // Utility function to validate and resolve URLs
 const validateUrl = async (url) => {
+  /*
   // Add a default protocol if none is provided
   if (!/^https?:\/\//i.test(url)) {
-    url = `https://${url}`;
+    url = `http://${url}`;
   }
+  */
 
   try {
     // Parse the URL
     const parsedUrl = new URL(url);
 
+    /*
     // Normalize by removing "www." if present
     const hostname = parsedUrl.hostname.startsWith('www.')
       ? parsedUrl.hostname.slice(4) // Remove "www."
       : parsedUrl.hostname;
-
+    */
     // DNS validation
     await dns.lookup(hostname);
 
@@ -42,8 +45,8 @@ urlRouter.post('/shorturl', async (req, res) => {
   let { url } = req.body;
 
   try {
-    const validatedUrl = await validateUrl(url);
-    const savedUrl = await findOrCreateUrl(validatedUrl);
+    // const validatedUrl = await validateUrl(url);
+    const savedUrl = await findOrCreateUrl(url);
 
     res.json({
       original_url: savedUrl.url,
