@@ -3,6 +3,7 @@
   "version": "0.0.3",
   "description": "API project for freeCodeCamp",
   "main": "main.js",
+  "type":"module",
   "scripts": {
     "start": "node main.js"
   },

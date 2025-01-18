@@ -56,13 +56,14 @@ const createAndSaveUrl = async (inputUrl) => {
 const findUrlByParameter = async (parameter, value) => {
   try {
     const query = {};
-    query[parameter] = value; // Dynamically set the field
-    return await Url.findOne(query);
+    query[parameter] = value; // Dynamically set the query field
+    return await Url.findOne(query); // Use Mongoose to find the document
   } catch (error) {
     console.error('Error finding URL:', error);
     throw error;
   }
 };
+
 
 // Find or create a URL (DRY approach)
 const findOrCreateUrl = async (inputUrl) => {

@@ -1,3 +1,15 @@
-# URL Shortener Microservice
+# Short URL API
 
-This is the boilerplate code for the URL Shortener Microservice project. Instructions for building your project can be found at https://www.freecodecamp.org/learn/back-end-development-and-apis/back-end-development-and-apis-projects/url-shortener-microservice.
+A Node.js and Express-based API to shorten URLs.
+
+## Features
+- POST a URL to `/api/shorturl` to receive a shortened URL.
+- Redirect to the original URL via `/api/shorturl/:short_url`.
+
+## Internal functionality
+- Connects with a MongoDB database
+- Validates and normalizes input URLs
+
+
+## Commands
+- `npm start`: Run the server.

@@ -60,8 +60,12 @@ urlRouter.post('/shorturl', async (req, res) => {
 
 // GET: Redirect to the original URL
 urlRouter.get('/shorturl/:short_url', async (req, res) => {
-  const { short_url } = req.params;
-
+  const short_url = Number(req.params.short_url);
+  // Validate if `short_url` is a valid number
+  if (isNaN(short_url)) {
+    return res.status(400).json({ error: 'Invalid short URL' });
+  }
+  
   try {
     const urlDocument = await findUrlByParameter('shortUrl', short_url);
     if (!urlDocument) {
@@ -74,6 +78,7 @@ urlRouter.get('/shorturl/:short_url', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 // Error handling middleware
 const errorHandler = (err, req, res, next) => {
