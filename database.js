@@ -17,8 +17,8 @@ const initialize = async () => {
 
 // Define schema and model
 const urlSchema = new mongoose.Schema({
-  url: { type: String, unique: true }, // Enforce unique URLs
-  shortUrl: { type: Number, unique: true },
+  url: { type: String, required: true, unique: true },
+  shortUrl: { type: Number, required: true, unique: true },
 });
 
 // Build model
@@ -40,6 +40,23 @@ const generateUniqueShortUrl = async () => {
   return shortUrl;
 };
 
+// Find or create a URL (DRY approach)
+const findOrCreateUrl = async (inputUrl) => {
+  try {
+    // Check if the URL already exists
+    const existingUrl = await findUrlByParameter('url', inputUrl);
+    if (existingUrl) {
+      return existingUrl; // Return existing document
+    }
+
+    // If not found, create and return a new URL
+    return await createAndSaveUrl(inputUrl);
+  } catch (error) {
+    console.error('Error in findOrCreateUrl:', error);
+    throw error;
+  }
+};
+
 // Create and save a new URL
 const createAndSaveUrl = async (inputUrl) => {
   try {
@@ -56,28 +73,10 @@ const createAndSaveUrl = async (inputUrl) => {
 const findUrlByParameter = async (parameter, value) => {
   try {
     const query = {};
-    query[parameter] = value; // Dynamically set the query field
+    query[parameter] = value;
     return await Url.findOne(query); // Use Mongoose to find the document
   } catch (error) {
     console.error('Error finding URL:', error);
-    throw error;
-  }
-};
-
-
-// Find or create a URL (DRY approach)
-const findOrCreateUrl = async (inputUrl) => {
-  try {
-    // Check if the URL already exists
-    const existingUrl = await findUrlByParameter('url', inputUrl);
-    if (existingUrl) {
-      return existingUrl; // Return existing document
-    }
-
-    // If not found, create and return a new URL
-    return await createAndSaveUrl(inputUrl);
-  } catch (error) {
-    console.error('Error in findOrCreateUrl:', error);
     throw error;
   }
 };
